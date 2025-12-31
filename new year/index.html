@@ -1071,10 +1071,8 @@
         
       }, 600);
       
-      // Haptic feedback for mobile
-      if (navigator.vibrate && isMobile) {
-        navigator.vibrate([50, 100, 50]);
-      }
+      // Haptic feedback for mobile - REMOVED
+      // No vibration on enter new year button
     };
 
     // --- Enhanced Custom Cursor System ---
@@ -1617,7 +1615,7 @@
       
       // Enhanced haptic feedback for mobile
       if (navigator.vibrate && isMobile) {
-        navigator.vibrate([100, 50, 100, 50, 200, 100, 300]); // More complex pattern
+        navigator.vibrate(200); // Single short vibration
       }
       
       // Add sound effect simulation (visual feedback)
