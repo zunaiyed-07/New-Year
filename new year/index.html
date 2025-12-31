@@ -977,13 +977,37 @@
     const isMobile = window.innerWidth <= 768;
     const isHighDPI = window.devicePixelRatio > 1;
     
-    // Get current year dynamically
-    const currentYear = new Date().getFullYear();
-    const nextYear = currentYear + 1;
+    // Get current year dynamically with proper New Year logic
+    const now = new Date();
+    const currentYear = now.getFullYear();
     
-    // Update years dynamically
-    document.getElementById('currentYear').textContent = currentYear;
-    document.querySelector('.year-display').textContent = nextYear;
+    // Check if today is January 1st
+    const isJanuary1st = now.getMonth() === 0 && now.getDate() === 1;
+    
+    let displayCurrentYear, displayNextYear, buttonText, landingTitle;
+    
+    if (isJanuary1st) {
+      // On January 1st: Show previous year transitioning to current year
+      displayCurrentYear = currentYear - 1;
+      displayNextYear = currentYear;
+      buttonText = `Enter New Year ${currentYear}`;
+      landingTitle = `Thank You for an Amazing ${currentYear - 1}`;
+    } else {
+      // From January 2nd onwards: Show current year transitioning to next year
+      displayCurrentYear = currentYear;
+      displayNextYear = currentYear + 1;
+      buttonText = `Enter New Year ${currentYear + 1}`;
+      landingTitle = `Thank You for an Amazing ${currentYear}`;
+    }
+    
+    // Update the display elements
+    document.getElementById('currentYear').textContent = displayCurrentYear;
+    document.querySelector('.year-display').textContent = displayNextYear;
+    document.querySelector('.enter-button').textContent = buttonText;
+    document.querySelector('.landing-title').textContent = landingTitle;
+    
+    // For countdown calculation, use the appropriate next year
+    const nextYear = isJanuary1st ? currentYear : currentYear + 1;
     
     // Throttle function for performance
     const throttle = (func, limit) => {
